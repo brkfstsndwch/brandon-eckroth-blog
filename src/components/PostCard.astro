@@ -1,0 +1,35 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+type Props = {
+  post: CollectionEntry<"posts">;
+};
+
+const { post } = Astro.props;
+const { title, date } = post.data;
+---
+
+<article class="mb-4">
+  <a
+    class="cursor-pointer hover:text-green-500 transition-colors duration-100"
+    href=`/posts/${post.slug}`
+  >
+    <h2 class="text-xl font-protoMono uppercase antialiased mb-1">
+      {title}
+    </h2>
+    <time
+      class="text-gray-500 text-xs font-sometypeMono block"
+      datetime={date.toLocaleDateString(undefined, {
+        month: "long",
+        day: "numeric",
+      })}
+    >
+      {
+        date.toLocaleDateString(undefined, {
+          month: "long",
+          day: "numeric",
+        })
+      }, {date.getFullYear()}
+    </time>
+  </a>
+</article>
